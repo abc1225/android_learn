@@ -65,17 +65,17 @@ public class MainActivity extends AppCompatActivity {
 
 
             //adb shell settings get global show_hidden_icon_apps_enabled
-//            try {
-//                int showHidden = Settings.Global.getInt(getContentResolver(),
-//                        "show_hidden_icon_apps_enabled", 1);
-//                Log.d("MainActivity", "showHidden: " + showHidden);
-//                if (showHidden != 0) {
-//                    Settings.Global.putInt(getContentResolver(), "show_hidden_icon_apps_enabled", 0);
-//                    Log.i("MainActivity", "set showHidden: ");
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+            try {
+                int showHidden = Settings.Global.getInt(getContentResolver(),
+                        "show_hidden_icon_apps_enabled", 1);
+                Log.d("MainActivity", "showHidden: " + showHidden);
+                if (showHidden != 0) {
+                    Settings.Global.putInt(getContentResolver(), "show_hidden_icon_apps_enabled", 0);
+                    Log.i("MainActivity", "set showHidden: ");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
 
 
