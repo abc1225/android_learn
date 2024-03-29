@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <string name="static_disabled_message">点击无效</string>
+
+    <string name="static_shortcut_short_label">静态</string>
+    <string name="static_shortcut_long_label">MainActivity2</string>
+
+    <string name="dynamic_shortcut_short_label1">动态</string>
+    <string name="dynamic_shortcut_long_label1">百度搜索</string>
+
+    <string name="pinned_shortcut_short_label2">桌面</string>
+    <string name="pinned_shortcut_long_label2">桌面快捷方式</string>
+
+</resources>

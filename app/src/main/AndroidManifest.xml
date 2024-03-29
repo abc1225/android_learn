@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.QUERY_ALL_APP_SHORTCUTS" />
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <permission android:name="android.permission.WRITE_SECURE_SETTINGS"
+        tools:ignore="ReservedSystemPermission" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication"
+        android:excludeFromRecents="true"
+        tools:targetApi="31">
+<!--        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.MyApplication">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>-->
+
+
+
+        <activity
+            android:name=".MainActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.MyApplication"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.TEST" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.example.myapplication" />
+                <data android:host="goapp.fromchrome" android:scheme="tgsoft" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".AliasMainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MyApplication"
+            >
+            <!-- <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+                 <category android:name="android.intent.category.LAUNCHER" />
+                 <data
+                     android:host="MainActivity"
+                     android:scheme="com.learn.alias.target"
+                     tools:ignore="AppLinkUrlError" />
+             </intent-filter>-->
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.TEST" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.ksgzlf.djbwrpgk" />
+
+                <data android:host="goapp.fromchrome" android:scheme="tgsoft" />
+            </intent-filter>
+        </activity>
+
+        <!-- 外部要启动的Activity -->
+<!--        <activity
+            android:name=".MainActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleInstance" />-->
+
+
+
+        <!--<activity-alias
+            android:name="cn.test.hideicon.Alias1Activity"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@drawable/ic_launcher_background"
+            android:label="aaaa"
+            android:launchMode="singleTask"
+            android:roundIcon="@drawable/icon_transparent"
+            android:targetActivity="cn.test.hideicon.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                &lt;!&ndash;                <category android:name="android.intent.category.BROWSABLE" />&ndash;&gt;
+                &lt;!&ndash;                <category android:name="android.intent.category.TEST" />&ndash;&gt;
+                <category android:name="android.intent.category.LAUNCHER" />
+                &lt;!&ndash;                <category android:name="com.ksgzlf.djbwrpgk" />&ndash;&gt;
+                &lt;!&ndash;                <data android:host="goapp.fromchrome" android:scheme="tgsoft" />&ndash;&gt;
+            </intent-filter>
+        </activity-alias>-->
+
+
+
+
+
+        <!--<activity-alias
+            android:name="com.android.ui.ActivityAlias5"
+            android:configChanges="keyboard|orientation|screenSize"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@drawable/icon_transparent"
+            android:label="maygroup55555"
+            android:launchMode="singleTask"
+            android:roundIcon="@drawable/icon_transparent"
+            android:targetActivity="cn.test.hideicon.MainActivity">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.CHOOSER" />
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+
+                <category android:name="android.intent.category.INFO" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.internal.category.PLATLOGO" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_CHANGED" />
+                <action android:name="com.ui.OnAlarmReceiver.ACTION_WIDGET_RECEIVER" />
+                <action android:name="com.android.vending.billing.InAppBillingService.COIN" />
+                <action android:name="com.android.vending.billing.InAppBillingService.COIO" />
+                <action android:name="com.android.vending.billing.InAppBillingService.LUCM" />
+                <action android:name="com.android.vending.billing.InAppBillingService.PROX" />
+                <action android:name="ir.cafebazaar.pardakht.InAppBillingService.BIND" />
+                <action android:name="ru.aaaaaaax.installer" />
+                <action android:name="com.nokia.payment.iapenabler.InAppBillingService.BIND" />
+                <action android:name="com.android.vending.billing.InAppBillingService.INST" />
+                <action android:name="com.App.Reborn" />
+            </intent-filter>
+        </activity-alias>-->
+
+    </application>
+
+</manifest>

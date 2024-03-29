@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.example.myapplication'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.myapplication"
+        minSdk 25
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file('key_store.jks')
+            storePassword "rtc1223"
+            keyAlias "videortc"
+            keyPassword "rtc1223"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+        debug {
+            storeFile file('key_store.jks')
+            storePassword "rtc1223"
+            keyAlias "videortc"
+            keyPassword "rtc1223"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            //对齐
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release // 签名配置
+        }
+
+        applicationVariants.all { variant -> //批量修改Apk名字
+            variant.outputs.all { output ->
+                if (!variant.buildType.isDebuggable()) {
+                    //获取签名的名字 variant.signingConfig.name
+                    //要被替换的源字符串
+                    def sourceFile = "app-release"
+                    //替换的字符串
+                    def replaceFile = "VideoRtc-Release-V${variant.versionName}"
+                    outputFileName = output.outputFile.name.replace(sourceFile, replaceFile);
+                    //遗留问题：如何获取当前module的name，如CodeBooke这个名字怎么获取到
+                }
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+}
+
+dependencies {
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.navigation:navigation-fragment:2.4.1'
+    implementation 'androidx.navigation:navigation-ui:2.4.1'
+
+}
