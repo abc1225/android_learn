@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 //            String alias = getCurrentLauncher();
-            String alias = "com.example.myapplication.MainActivity2";
+            String alias = "com.example.myapplication.MainActivity5";
             Log.d("tag", "getCurrentLauncher: " + alias);
             changeLauncher(alias);
 
