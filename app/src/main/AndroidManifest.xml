@@ -39,7 +39,7 @@
         <!--若要隐藏图标，可以：1.icon设置为空，roundIcon也为drawable里面的icon_transparent.xml 2.theme设置为 KeepLiveTheme 3.label设置为""-->
 
         <activity
-            android:name="com.example.myapplication.MainActivity"
+            android:name="com.example.myapplication.WebViewActivity"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@drawable/icon_transparent"
@@ -70,6 +70,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>-->
         </activity>
+
+
 
 
 <!--        <activity-->
