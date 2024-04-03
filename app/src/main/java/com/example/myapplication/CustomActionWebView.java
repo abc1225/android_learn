@@ -29,7 +29,7 @@ public class CustomActionWebView extends WebView {
     ActionSelectListener mActionSelectListener;
 
     public interface ActionSelectListener {
-        void onClick(String title, String selectText);
+        void onClick(String title, String selectText, String seq);
     }
 
     public CustomActionWebView(Context context) {
@@ -102,8 +102,10 @@ public class CustomActionWebView extends WebView {
 
         String js = "(function getSelectedText() {" +
                 "var txt;" +
+                "var seq = 0;" +
                 "var title = \"" + title + "\";" +
                 "if (window.getSelection) {" +
+                "seq = 1;" +
                 "txt = window.getSelection().toString();" +
 
                 "var range = window.getSelection().getRangeAt(0);" +
@@ -114,6 +116,7 @@ public class CustomActionWebView extends WebView {
                 "range.insertNode(span);" +
 
                 "} else if (window.document.getSelection) {" +
+                "seq = 2;" +
                 "txt = window.document.getSelection().toString();" +
 
                 "var range = window.document.getSelection().getRangeAt(0);" +
@@ -124,6 +127,7 @@ public class CustomActionWebView extends WebView {
                 "range.insertNode(span);" +
 
                 "} else if (window.document.selection) {" +
+                "seq = 3;" +
                 "txt = window.document.selection.createRange().text;" +
 
                 "var range = window.document.selection.getRangeAt(0);" +
@@ -134,7 +138,7 @@ public class CustomActionWebView extends WebView {
                 "range.insertNode(span);" +
 
                 "}" +
-                "JSInterface.callback(txt,title);" +
+                "JSInterface.callback(txt,title,seq);" +
                 "})()";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             evaluateJavascript("javascript:" + js, null);
@@ -183,9 +187,9 @@ public class CustomActionWebView extends WebView {
         }
 
         @JavascriptInterface
-        public void callback(final String value, final String title) {
+        public void callback(final String value, final String title, final String seq) {
             if(mActionSelectListener != null) {
-                mActionSelectListener.onClick(title, value);
+                mActionSelectListener.onClick(title, value, seq);
             }
         }
     }

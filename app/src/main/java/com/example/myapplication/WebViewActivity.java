@@ -55,13 +55,13 @@ public class WebViewActivity extends AppCompatActivity {
         //增加点击回调
         mCustomActionWebView.setActionSelectListener(new CustomActionWebView.ActionSelectListener() {
             @Override
-            public void onClick(String title, String selectText) {
+            public void onClick(String title, String selectText, String seq) {
                 if(title.equals("APIWeb")) {
                     Intent intent = new Intent(WebViewActivity.this, APIWebViewActivity.class);
                     startActivity(intent);
                     return;
                 }
-                Toast.makeText(WebViewActivity.this, "Click Item: " + title + "。\n\nValue: " + selectText, Toast.LENGTH_LONG).show();
+                Toast.makeText(WebViewActivity.this, "Click Item: " + title + "。\n\nValue: " + selectText+ "。\n\nSeq: " + seq, Toast.LENGTH_LONG).show();
             }
         });
 

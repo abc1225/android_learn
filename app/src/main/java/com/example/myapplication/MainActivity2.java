@@ -1,48 +1,29 @@
 package com.example.myapplication;
 
- import android.app.ActivityManager;
- import android.content.ComponentName;
- import android.content.ContentResolver;
- import android.content.Context;
- import android.content.Intent;
- import android.content.pm.LauncherActivityInfo;
- import android.content.pm.LauncherApps;
- import android.content.pm.PackageInfo;
- import android.content.pm.PackageManager;
- import android.content.pm.ProviderInfo;
- import android.content.pm.ResolveInfo;
- import android.content.pm.ShortcutInfo;
- import android.content.pm.ShortcutManager;
- import android.database.Cursor;
- import android.graphics.drawable.Icon;
- import android.net.Uri;
- import android.os.Bundle;
+import android.app.ActivityManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
- import android.os.UserHandle;
- import android.provider.Settings;
- import android.text.TextUtils;
- import android.util.Log;
- import android.view.Menu;
- import android.widget.TextView;
-
- import java.util.ArrayList;
- import java.util.List;
-
- import android.app.PendingIntent;
- import android.content.Intent;
- import android.content.pm.ShortcutInfo;
- import android.content.pm.ShortcutManager;
- import android.graphics.drawable.Icon;
- import android.net.Uri;
- import android.os.Bundle;
- import android.view.View;
- import android.widget.Button;
+import java.util.ArrayList;
+import java.util.List;
 
 
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
     private TextView mTextView;
     private static final String ID_DYNAMIC_1 = "id_dynamic_1";
@@ -59,36 +40,25 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button_first).setOnClickListener((view -> {
             mTextView.setText("点击第" + (num++) + "次" + " ping: " + PingUtils.getRTT("8.8.8.8"));
 
-
-//            String alias = getCurrentLauncher();
-            String alias = "com.example.myapplication.MainActivity5";
-            Log.d("tag", "getCurrentLauncher: " + alias);
-            changeLauncher(alias);
-
-//            if(null != alias){
-//                changeLauncher(alias);
-//            }
-
-//            //  创建桌面图标
-//            // 点击按钮后，再返回长按图标，右侧显示快捷方式-》百度搜索
-//            setDynamicShortcuts();
-//            // 创建桌面快捷方式
-//            createPinnedShortcuts();
+            // 点击按钮后，再返回长按图标，右侧显示快捷方式-》百度搜索
+            setDynamicShortcuts();
+            // 创建桌面快捷方式
+            createPinnedShortcuts();
 
 
-//            // 隐藏图标
-//            //adb shell settings get global show_hidden_icon_apps_enabled
-//            try {
-//                int showHidden = Settings.Global.getInt(getContentResolver(),
-//                        "show_hidden_icon_apps_enabled", 1);
-//                Log.d("MainActivity", "showHidden: " + showHidden);
-//                if (showHidden != 0) {
-//                    Settings.Global.putInt(getContentResolver(), "show_hidden_icon_apps_enabled", 0);
-//                    Log.i("MainActivity", "set showHidden: ");
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+
+            //adb shell settings get global show_hidden_icon_apps_enabled
+            try {
+                int showHidden = Settings.Global.getInt(getContentResolver(),
+                        "show_hidden_icon_apps_enabled", 1);
+                Log.d("MainActivity", "showHidden: " + showHidden);
+                if (showHidden != 0) {
+                    Settings.Global.putInt(getContentResolver(), "show_hidden_icon_apps_enabled", 0);
+                    Log.i("MainActivity", "set showHidden: ");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
 
 
@@ -105,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
         String packageName = getPackageName();
         String[] aliasNames = {
                 ".MainActivity",
-                ".MainActivity2"
+                ".other1",
+                ".other2"
         };
         for (String alias : aliasNames) {
             ComponentName componentName = new ComponentName(packageName, packageName + alias);
@@ -120,18 +91,11 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    // 禁止显示
-    private void setDisableAlias(String name){
-        PackageManager pm = getPackageManager();
-        pm.setComponentEnabledSetting(new ComponentName(MainActivity.this, name),
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
-    }
-
     private void changeLauncher(String name) {
         PackageManager pm = getPackageManager();
         pm.setComponentEnabledSetting(getComponentName(),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
-        pm.setComponentEnabledSetting(new ComponentName(MainActivity.this, name),
+        pm.setComponentEnabledSetting(new ComponentName(MainActivity2.this, name),
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
 
         //Intent 重启 Launcher 应用
@@ -225,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
                 if (shortcutManager != null && shortcutManager.isRequestPinShortcutSupported()) {
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent = new Intent(this, MainActivity2.class);
                     intent.setAction(Intent.ACTION_VIEW);
                     intent.putExtra("key", "fromPinnedShortcut");
                     ShortcutInfo pinShortcutInfo = new ShortcutInfo.Builder(this, "my-shortcut")

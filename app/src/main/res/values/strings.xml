@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">App Name1</string>
+    <string name="app_name_2">  </string>
 
     <string name="static_disabled_message">点击无效</string>
 
