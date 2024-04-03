@@ -69,7 +69,8 @@ public class WebViewActivity extends AppCompatActivity {
         mCustomActionWebView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mCustomActionWebView.loadUrl("https://www.baidu.com/");
+//                mCustomActionWebView.loadUrl("https://www.baidu.com/");
+                mCustomActionWebView.loadUrl("file:///android_asset/web/test.html");
             }
         }, 200);
     }
